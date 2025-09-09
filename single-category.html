@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>David Chu's China Bistro - Dish Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/global.css" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg p-2 container" data-bs-theme="dark">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+
+          <div class="d-flex align-items-center">
+            <a class="navbar-brand me-3 d-sm-block d-none" href="/index.html">
+              <img src="/public/restaurant-logo.png" alt="restaurant logo" width="96">
+            </a>
+            <div class="d-flex flex-column">
+              <a class="navbar-brand mb-0" href="/index.html">
+                <h1 class="h4 text-white fs-5">David Chu's China Bistro</h1>
+              </a>
+              <div class="d-flex align-items-center">
+                <img src="public/star.png" alt="Kosher certification" width="24" class="me-1">
+                <span class="text-white fs-6">Kosher Certified</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-nav" aria-controls="collapsable-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                  <i class="fa-solid fa-house"></i> Home
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="menu-categories.html">
+                  <i class="fa-solid fa-utensils"></i> Menu
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa-solid fa-circle-info"></i> About
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa-solid fa-award"></i> Awards
+                </a>
+              </li>
+              <li class="nav-item d-none d-lg-flex flex-column align-items-end">
+                <a class="nav-link p-0" href="tel:410-602-5008">410-602-5008</a>
+                <small class="text-white">* We Deliver</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div id="call-btn" class="d-block d-sm-none text-center my-2">
+      <a class="btn btn-primary" href="tel:+14106025008">
+        <i class="fa fa-phone"></i> +1 (410) 602-5008
+      </a>
+    </div>
+    <div id="xs-deliver" class="text-center d-block d-sm-none mb-3">* We Deliver</div>
+
+    <main id="main-content" class="container flex-grow-1 mt-4">
+      <h2 class="text-center mb-3">Dish Menu</h2>
+      <p class="text-center mb-5">Dish is not served until after 1pm.</p>
+
+      <section class="row g-4 justify-content-center text-center text-sm-start">
+        <div class="col-md-6">
+          <div class="row g-3 align-items-start">
+            <div class="col-sm-5">
+              <div class="position-relative d-inline-block">
+                <img src="public/dish.png" alt="Item" class="img-fluid rounded">
+                <span class="badge bg-dark position-absolute bottom-0 end-0 m-1">D01</span>
+              </div>
+              <div class="fw-bold mt-2">
+                $10.95 <small>(pint)</small> - $14.95 <small>(quart)</small>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <h3 class="h6">Veal with Mixed Vegetables</h3>
+              <p class="small fst-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse minima incidunt impedit. Asperiores, voluptatem. Sint aspernatur provident...</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row g-3 align-items-start">
+            <div class="col-sm-5">
+              <div class="position-relative d-inline-block">
+                <span class="badge bg-dark position-absolute bottom-0 end-0 m-1">D02</span>
+                <img src="public/dish.png" alt="Item" class="img-fluid rounded">
+              </div>
+              <div class="fw-bold mt-2">
+                $10.95 <small>(pint)</small> - $14.95 <small>(quart)</small>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <h3 class="h6">Veal with Mixed Vegetables</h3>
+              <p class="small fst-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse minima incidunt impedit. Asperiores, voluptatem. Sint aspernatur provident...</p>
+            </div>
+          </div>
+        </div>    
+
+        <div class="col-md-6">
+          <div class="row g-3 align-items-start">
+            <div class="col-sm-5">
+              <div class="position-relative d-inline-block">
+                <span class="badge bg-dark position-absolute bottom-0 end-0 m-1">D03</span>
+                <img src="public/dish.png" alt="Item" class="img-fluid rounded">
+              </div>
+              <div class="fw-bold mt-2">
+                $10.95 <small>(pint)</small> - $14.95 <small>(quart)</small>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <h3 class="h6">Veal with Mixed Vegetables</h3>
+              <p class="small fst-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse minima incidunt impedit. Asperiores, voluptatem. Sint aspernatur provident...</p>
+            </div>
+          </div>
+        </div> 
+
+        <div class="col-md-6">
+          <div class="row g-3 align-items-start">
+            <div class="col-sm-5">
+              <div class="position-relative d-inline-block">
+                <span class="badge bg-dark position-absolute bottom-0 end-0 m-1">D04</span>
+                <img src="public/dish.png" alt="Item" class="img-fluid rounded">
+              </div>
+              <div class="fw-bold mt-2">
+                $10.95 <small>(pint)</small> - $14.95 <small>(quart)</small>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <h3 class="h6">Veal with Mixed Vegetables</h3>
+              <p class="small fst-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse minima incidunt impedit. Asperiores, voluptatem. Sint aspernatur provident...</p>
+            </div>
+          </div>
+        </div> 
+        
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 mt-5 bg-dark">
+      <div class="container">
+        <div class="row g-4">
+          <section id="hours" class="col-sm-4">
+            <span class="fw-bold">Hours:</span><br>
+            Sun-Thurs: 11:15am - 10:00pm<br>
+            Fri: 11:15am - 2:30pm<br>
+            Saturday Closed
+            <hr class="d-block d-sm-none">
+          </section>
+
+          <section id="address" class="col-sm-4">
+            <span class="fw-bold">Address:</span><br>
+            7105 Reisterstown Road<br>
+            Baltimore, MD 21215
+            <p class="mb-0">* Delivery area within 3-4 miles, with minimum order of $20 plus $3 charge for all deliveries.</p>
+            <hr class="d-block d-sm-none">
+          </section>
+
+          <section id="testimonials" class="col-sm-4">
+            <p>"The best Chinese restaurant I've been to! And that's saying a lot, since I've been to many!"</p>
+            <p>"Amazing food! Great service! Couldn't ask for more! I'll be back again and again!"</p>
+          </section>
+        </div>
+
+        <div class="text-center mt-5 pb-1">&copy; Copyright Lucas Rodrigues 2025</div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

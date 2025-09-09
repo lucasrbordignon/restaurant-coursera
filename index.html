@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/styles/global.css" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Home - David Chu's China Bistro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body class="d-flex flex-column justify-content-between min-vh-100">
+    <!-- header -->
+    <header>     
+      <nav class="navbar navbar-expand-lg p-2 container" data-bs-theme="dark">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+
+          <div class="d-flex align-items-center">
+            <a class="navbar-brand me-3 d-sm-block d-none" href="/index.html">
+              <img src="/public/restaurant-logo.png" alt="restaurant logo" width="96" class="d-inline-block align-text-top">
+            </a>
+
+            <div class="d-flex flex-column">
+              <a class="navbar-brand mb-0" href="/index.html">
+                <h1 class="h4 text-white fs-5">David Chu's China Bistro</h1>
+              </a>
+              <div class="d-flex align-items-center">
+                <img src="public/star.png" alt="Kosher certification" width="24" class="me-1">
+                <span class="text-white fs-6">Kosher Certified</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-nav" aria-controls="collapsable-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+              <li class="nav-item">
+                <a class="nav-link" href="menu-categories.html">
+                  <i class="fa-solid fa-utensils"></i>
+                  Menu
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span class="glyphicon glyphicon-info-sign"></span> About
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fa-solid fa-award"></i>
+                  <span class="glyphicon glyphicon-certificate"></span> Awards
+                </a>
+              </li>
+              <li class="nav-item d-none d-lg-flex flex-column align-items-end">
+                <a class="nav-link p-0" href="tel:410-602-5008">410-602-5008</a>
+                <small class="text-white">* We Deliver</small>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div id="call-btn" class="d-block d-sm-none text-center">
+      <a class="btn btn-primary" href="tel:+14106025008">
+        <i class="fa fa-phone" aria-hidden="true"></i>
+        +1 (410) 602-5008
+      </a>
+    </div>
+
+    <div id="xs-deliver" class="text-center d-block d-sm-none">
+      * We Deliver
+    </div>
+
+    <!-- main content --> 
+    <main id="main-content" class="container flex-grow-1 mt-5">
+      <div class="rounded text-center mb-4">
+        <img src="public/restaurant.png" alt="Picture of restaurant" class="img-fluid d-block d-lg-none rounded-2">
+      </div>
+
+      <div id="home-tiles" class="row g-3">
+
+        <div class="col-xs-12 col-sm-6 col-md-4" id="card">
+          <a href="menu-categories.html" class="d-block position-relative rounded-2 overflow-hidden w-100">
+            <img src="public/menu-tile.png" alt="Picture of menu" class="w-100 h-100">
+            <span class="position-absolute tile">
+              menu
+            </span>
+          </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4" id="card">
+          <a href="single-category.html" class="d-block position-relative rounded-2 overflow-hidden w-100">
+            <img src="public/specials-tile.png" alt="Picture of menu" class="w-100 h-100">
+            <span class="position-absolute tile">
+              specials
+            </span>
+          </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-4" id="card">
+          <a href="https://www.google.com/maps?ll=-23.512543,-47.464612&z=16&t=m&hl=pt-BR&gl=BR&mapclient=embed&cid=13175401478428024988" target="_blank" class="d-block position-relative rounded-2 overflow-hidden w-100 h-100">
+            <div class="ratio ratio-16x9 h-100">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.554844422933!2d-47.46718692455853!3d-23.51253835980065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c58b399cbfcc3d%3A0xb6d86dd69edbe09c!2sAGX%20SOFTWARE!5e0!3m2!1spt-BR!2sbr!4v1757434478962!5m2!1spt-BR!2sbr" 
+                class="w-100 h-100 d-block object-fit-cover" 
+                style="border:0;" 
+                allowfullscreen 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <span class="position-absolute tile">
+              map
+            </span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+     <footer class="py-4 mt-5 bg-dark">
+      <div class="container">
+        <div class="row g-4">
+          <section id="hours" class="col-12 col-sm-4">
+            <span class="fw-bold">Hours:</span><br>
+            Sun-Thurs: 11:15am - 10:00pm<br>
+            Fri: 11:15am - 2:30pm<br>
+            Saturday Closed
+            <hr class="d-block d-sm-none">
+          </section>
+
+          <section id="address" class="col-12 col-sm-4">
+            <span class="fw-bold">Address:</span><br>
+            7105 Reisterstown Road<br>
+            Baltimore, MD 21215
+            <p class="mb-0">* Delivery area within 3-4 miles, with minimum order of $20 plus $3 charge for all deliveries.</p>
+            <hr class="d-block d-sm-none">
+          </section>
+
+          <section id="testimonials" class="col-12 col-sm-4">
+            <p>"The best Chinese restaurant I've been to! And that's saying a lot, since I've been to many!"</p>
+            <p>"Amazing food! Great service! Couldn't ask for more! I'll be back again and again!"</p>
+          </section>
+        </div>
+
+        <div class="text-center mt-5 pb-1">&copy; Copyright Lucas Rodrigues 2025</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>

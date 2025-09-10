@@ -31,15 +31,15 @@ const menuItemHtml = "snippets/menu-item.html";
 
 (function (global) {
   const dc = {}
-
+  
   const insertHtml = (selector, html) => {
     const targetItem = document.querySelector(selector)
     targetItem.innerHTML = html
   }
 
   const showLoading = (selector) => {
-    var html = "<div class='center'>"
-    html += "<img class='center' src='public/images/loader.gif'></div>"
+    var html = "<div class='d-flex justify-content-center'>"
+    html += "<img class='center' src='public/loader2.gif'></div>"
     insertHtml(selector, html)
   }
 

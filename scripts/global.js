@@ -1,8 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
+"use strict"
+
+import { getHtml, getJson } from "./http.js";
+
+document.addEventListener('DOMContentLoaded', function () {
   const collapsableNav = document.querySelector('#collapsable-nav');
   const toggleCollapse = document.querySelector('#toggle-collapse');
 
-  document.addEventListener('click', function(event) {
+  document.addEventListener('click', function (event) {
     const screenWidth = window.innerWidth;
     const clickOutSide =
       screenWidth < 992 &&
@@ -17,143 +21,105 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+const homeHtml = "snippets/home-snippet.html";
+const allCategoriesUrl = "https://coursera-jhu-default-rtdb.firebaseio.com/categories.json";
+const categoriesTitleHtml = "snippets/categories-title-snippet.html";
+const categoryHtml = "snippets/category-snippet.html";
+const menuItemsUrl = "https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/";
+const menuItemsTitleHtml = "snippets/menu-items-title.html";
+const menuItemHtml = "snippets/menu-item.html";
 
 (function (global) {
   const dc = {}
 
-  const homeHtml = "snippets/home-snippet.html";
-  const allCategoriesUrl = "https://coursera-jhu-default-rtdb.firebaseio.com/categories.json";
-  const categoriesTitleHtml = "snippets/categories-title-snippet.html";
-  const categoryHtml = "snippets/category-snippet.html";
-  const menuItemsUrl = "https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/";
-  const menuItemsTitleHtml = "snippets/menu-items-title.html";
-  const menuItemHtml = "snippets/menu-item.html";
-
   const insertHtml = (selector, html) => {
-    const targetItem = document.querySelector(selector)    
+    const targetItem = document.querySelector(selector)
     targetItem.innerHTML = html
   }
 
   const showLoading = (selector) => {
     var html = "<div class='center'>"
-    html += "<img src='public/loader.gif'></div>"
+    html += "<img class='center' src='public/images/loader.gif'></div>"
     insertHtml(selector, html)
   }
 
   const insertProperty = (string, propName, propValue) => {
-    const propToReplace = `{{${propName}}}` 
+    const propToReplace = `{{${propName}}}`
     string = string.replace(new RegExp(propToReplace, "g"), propValue)
     return string
   }
 
-  const switchMenuToActive = () => {
-    const navHomeButton = document.querySelector("#navHomeButton")
-    var classes = navHomeButton.className
-    classes = classes.replace(new RegExp("active", "g"), "")
-    navHomeButton.className = classes
+  document.addEventListener("DOMContentLoaded", async () => {
+    showLoading("#main-content");
+    const homeHtmlContent = await getHtml(homeHtml);
+    document.querySelector("#main-content").innerHTML = homeHtmlContent;
+  });
 
-    var classes = navHomeButton.className
-    if ( classes.indexOf("active") == -1 ) {
-      classes += "active"
-      navHomeButton.className = classes
+  dc.loadMenuCategories = async () => {
+    showLoading("#main-content");
+    try {
+      const categories = await getJson(allCategoriesUrl);
+      await buildAndShowCategoriesHTML(categories);
+    } catch (error) {
+      console.error('Failed to load menu categories:', error);
     }
   }
 
-  document.addEventListener("DOMContentLoaded", (event) => {
-
-    showLoading("#main-content")
-    $ajaxUtils.sendGetRequest(
-      homeHtml,
-      (responseText) => {
-        document.querySelector("#main-content").innerHTML = responseText
-      },
-      false
-    )
-  })
-
-  dc.loadMenuCategories = () => {
-    showLoading("#main-content")
-    $ajaxUtils.sendGetRequest(allCategoriesUrl, buildAndShowCategoriesHTML)
+  dc.loadMenuItems = async (categoryShort) => {
+    showLoading("#main-content");
+    try {
+      const menuItems = await getJson(menuItemsUrl + categoryShort + ".json");
+      await buildAndShowMenuItemsHTML(menuItems);
+    } catch (error) {
+      console.error('Failed to load menu items:', error);
+    }
   }
 
-  dc.loadMenuItems = (categoryShort) => {
-    showLoading("#main-content")
+  async function buildAndShowCategoriesHTML(categories) {
+    const [categoriesTitleContent, categoryHtmlContent] = await Promise.all([
+      getHtml(categoriesTitleHtml),
+      getHtml(categoryHtml)
+    ]);
 
-    $ajaxUtils.sendGetRequest(
-      menuItemsUrl + categoryHtml + ".json",
-      buildAndShowMenuItemsHTML
-    )
-  }
+    const categoriesViewHtml = buildCategoriesViewHtml(
+      categories,
+      categoriesTitleContent,
+      categoryHtmlContent
+    );
 
-  function buildAndShowCategoriesHTML(categories) {
-
-    $ajaxUtils.sendGetRequest(
-      categoriesTitleHtml,
-      (categoriesTitleHtml) => {
-
-        $ajaxUtils.sendGetRequest(
-          categoryHtml,
-          (categoryHtml) => {
-
-            switchMenuToActive()
-
-            const categoriesViewHtml = buildCategoriesViewHtml(
-              categories,
-              categoriesTitleHtml,
-              categoryHtml
-            )
-
-            insertHtml("#main-content", categoriesViewHtml)
-          },
-          false
-        )
-      },
-      false
-    )
+    insertHtml("#main-content", categoriesViewHtml);
   }
 
   function buildCategoriesViewHtml(categories, categoriesTitleHtml, categoryHtml) {
     var finalHtml = categoriesTitleHtml
-    finalHtml +=  "<section class='row0'>"
+    finalHtml += "<section id='menu-categories' class='row g-3'>"
 
-    for ( category of categories ) {
+    for (let category of categories) {
       var html = categoryHtml
-      const name = category.name
-      const short_name = category.short_name
+      const { name, short_name } = category;
 
-      html = insertProperty(html, "name", name)
-      html = insertProperty(html, "short_name", short_name)
-      finalHtml += html
-    } 
-    
-    finalHtml += "</section>"
-    return finalHtml
+      html = insertProperty(html, "name", name);
+      html = insertProperty(html, "short_name", short_name);
+      finalHtml += html;
+    }
+
+    finalHtml += "</section>";
+    return finalHtml;
   }
 
-  function buildAndShowMenuItemsHTML (categoryMenuItems) {
-    $ajaxUtils.sendGetRequest(
-      menuItemsTitleHtml,
-      (menuItemsTitleHtml) => {
+  async function buildAndShowMenuItemsHTML(categoryMenuItems) {
+    const [menuItemsTitleContent, menuItemHtmlContent] = await Promise.all([
+      getHtml(menuItemsTitleHtml),
+      getHtml(menuItemHtml)
+    ]);
 
-        $ajaxUtils.sendGetRequest(
-          menuItemHtml,
-          (menuItemHtml) => {
+    const menuItemsViewHtml = buildMenuItemsViewHtml(
+      categoryMenuItems,
+      menuItemsTitleContent,
+      menuItemHtmlContent
+    );
 
-            switchMenuToActive()
-
-            const menuItemsViewHtml = buildMenuItemsViewHtml(
-              categoryMenuItems,
-              menuItemsTitleHtml,
-              menuItemHtml
-            )
-
-            insertHtml("#main-content", menuItemsViewHtml)
-          },
-          false
-        )
-      },
-      false
-    )
+    insertHtml("#main-content", menuItemsViewHtml);
   }
 
   function buildMenuItemsViewHtml(categoryMenuItems, menuItemsTitleHtml, menuItemHtml) {
@@ -161,22 +127,22 @@ document.addEventListener('DOMContentLoaded', function() {
       menuItemsTitleHtml,
       "name",
       categoryMenuItems.category.name
-    )
+    );
 
-    menuItemsTitleHtml  = insertProperty(
+    menuItemsTitleHtml = insertProperty(
       menuItemsTitleHtml,
-      "especial_instructions",
-      categoryMenuItems.category.especial_instructions
-    )
-    
-    var finalHtml = menuItemsTitleHtml
-    finalHtml += "<section class='row'>"
+      "special_instructions",
+      categoryMenuItems.category.special_instructions
+    );
 
-    const menuItems = categoryMenuItems.menu_items 
-    const catShortName = categoryMenuItems.category.short_name
+    var finalHtml = menuItemsTitleHtml;
+    finalHtml += "<section class='row g-4 justify-content-center text-center text-sm-start'>";
 
-    for (item of menuItems  ) {
-      var html = menuItemHtml
+    const menuItems = categoryMenuItems.menu_items;
+    const catShortName = categoryMenuItems.category.short_name;
+
+    for (let item of menuItems) {
+      var html = menuItemHtml;
       html = insertProperty(html, "short_name", item.short_name);
       html = insertProperty(html, "catShortName", catShortName);
       html = insertItemPrice(html, "price_small", item.price_small);
@@ -184,37 +150,31 @@ document.addEventListener('DOMContentLoaded', function() {
         html,
         "small_portion_name",
         item.small_portion_name
-      )
+      );
       html = insertItemPrice(
         html,
         "price_large",
         item.price_large
-      )
+      );
       html = insertItemPortionName(
         html,
         "large_portion_name",
         item.large_portion_name
-      )
-      html = insertProperty(html, "name", item.name)
-      html = insertProperty(html, "description", item.description)
+      );
+      html = insertProperty(html, "name", item.name);
+      html = insertProperty(html, "description", item.description);
 
-      // if (i % 2 != 0) {
-      //   html +=
-      //     "<div class='clearfix visible-lg-block visible-md-block'></div>";
-      // }
-
-      finalHtml += html
+      finalHtml += html;
     }
 
-    finalHtml += "</section>"
-    return finalHtml
+    finalHtml += "</section>";
+    return finalHtml;
   }
 
   function insertItemPrice(html, pricePropName, priceValue) {
     if (!priceValue) {
       return insertProperty(html, pricePropName, "");
     }
-
     priceValue = "$" + priceValue.toFixed(2);
     html = insertProperty(html, pricePropName, priceValue);
     return html;
@@ -224,11 +184,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!portionValue) {
       return insertProperty(html, portionPropName, "");
     }
-
     portionValue = "(" + portionValue + ")";
     html = insertProperty(html, portionPropName, portionValue);
     return html;
   }
 
   global.$dc = dc
-}) (window)
+})(window)
